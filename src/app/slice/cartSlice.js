@@ -2,16 +2,28 @@ import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify';
 
 
+
+
+let initialCart = [];
+
+if (typeof window !== 'undefined') {
+    const storedCart = localStorage.getItem('monstaCart');
+    initialCart = storedCart ? JSON.parse(storedCart) : [];
+}
+
 export const cartSlice = createSlice({
     name: 'monstaCart',
     initialState: {
-        monstaCart: localStorage.getItem('monstaCart') ? JSON.parse(localStorage.getItem('monstaCart')) : []
+        // monstaCart: localStorage.getItem('monstaCart') ? JSON.parse(localStorage.getItem('monstaCart')) : []
+        monstaCart: initialCart,
     },
     reducers: {
         addToCart(state, reqData) {
             let prodt_obj = reqData.payload; // getting product object
             state.monstaCart.push(prodt_obj);
-            localStorage.setItem('monstaCart', JSON.stringify(state.monstaCart));
+            if (typeof window !== 'undefined') {
+                localStorage.setItem('monstaCart', JSON.stringify(state.monstaCart));
+            }
 
             toast.success('Item added successfully!');
 
@@ -19,7 +31,9 @@ export const cartSlice = createSlice({
         deleteFromCart(state, reqData) {
             let prodt_id = reqData.payload; // getting product id
             state.monstaCart = state.monstaCart.filter((item) => item.id != prodt_id);
-            localStorage.setItem('monstaCart', JSON.stringify(state.monstaCart));
+            if (typeof window !== 'undefined') {
+                localStorage.setItem('monstaCart', JSON.stringify(state.monstaCart));
+            }
 
             toast.warn('Product Removed!');
 
@@ -36,7 +50,9 @@ export const cartSlice = createSlice({
                 return item;
             });
 
-            localStorage.setItem('monstaCart', JSON.stringify(state.monstaCart));
+            if (typeof window !== 'undefined') {
+                localStorage.setItem('monstaCart', JSON.stringify(state.monstaCart));
+            }
         },
         updateCartDecrement(state, reqData) {
             let prodt_id = reqData.payload; // getting product id
@@ -52,7 +68,9 @@ export const cartSlice = createSlice({
             })
                 .filter((item) => item.qty > 0); // Remove if qty <= 0
 
-            localStorage.setItem('monstaCart', JSON.stringify(state.monstaCart));
+            if (typeof window !== 'undefined') {
+                localStorage.setItem('monstaCart', JSON.stringify(state.monstaCart));
+            }
         },
     }
 })
