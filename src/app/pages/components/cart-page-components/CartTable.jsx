@@ -13,8 +13,11 @@ export default function CartTable() {
     });
 
     const ttlPrice = monstaCart.reduce((acc, currVal) => {
-        return acc + currVal.price;
+        const quantity = currVal.qty || 1;
+        return acc + (currVal.price * quantity);
     }, 0);
+
+
 
 
 

@@ -26,11 +26,33 @@ export const cartSlice = createSlice({
         },
         updateCartIncrement(state, reqData) {
             let prodt_id = reqData.payload; // getting product id
+            state.monstaCart = state.monstaCart.map((item) => {
+                if (item.id === prodt_id) {
+                    return {
+                        ...item,
+                        qty: item.qty + 1
+                    };
+                }
+                return item;
+            });
 
+            localStorage.setItem('monstaCart', JSON.stringify(state.monstaCart));
         },
         updateCartDecrement(state, reqData) {
             let prodt_id = reqData.payload; // getting product id
 
+            state.monstaCart = state.monstaCart.map((item) => {
+                if (item.id === prodt_id) {
+                    return {
+                        ...item,
+                        qty: item.qty - 1
+                    };
+                }
+                return item;
+            })
+                .filter((item) => item.qty > 0); // Remove if qty <= 0
+
+            localStorage.setItem('monstaCart', JSON.stringify(state.monstaCart));
         },
     }
 })

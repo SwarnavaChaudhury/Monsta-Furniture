@@ -80,17 +80,17 @@ export default function Footer() {
                     </h1>
                     <ul className='text-[14px] text-[#5a5a5a]'>
                         <li className='mb-2 hover:text-[#C09578] duration-200'>
-                            <Link href={'/'}>
+                            <Link href={'/about-us'}>
                                 About Us
                             </Link>
                         </li>
                         <li className='mb-2 hover:text-[#C09578] duration-200'>
-                            <Link href={'/'}>
+                            <Link href={'/contact-us'}>
                                 Contact Us
                             </Link>
                         </li>
                         <li className='mb-2 hover:text-[#C09578] duration-200'>
-                            <Link href={'/'}>
+                            <Link href={'/frequently-questions'}>
                                 Frequently Questions
                             </Link>
                         </li>
@@ -104,22 +104,22 @@ export default function Footer() {
                     </h1>
                     <ul className='text-[14px] text-[#5a5a5a]'>
                         <li className='mb-2 hover:text-[#C09578] duration-200'>
-                            <Link href={'/'}>
+                            <Link href={'/dashboard'}>
                                 My Dashboard
                             </Link>
                         </li>
                         <li className='mb-2 hover:text-[#C09578] duration-200'>
-                            <Link href={'/'}>
+                            <Link href={'/wishlist'}>
                                 Wishlist
                             </Link>
                         </li>
                         <li className='mb-2 hover:text-[#C09578] duration-200'>
-                            <Link href={'/'}>
+                            <Link href={'/cart'}>
                                 Cart
                             </Link>
                         </li>
                         <li className='mb-2 hover:text-[#C09578] duration-200'>
-                            <Link href={'/'}>
+                            <Link href={'/checkout'}>
                                 Checkout
                             </Link>
                         </li>
@@ -190,17 +190,17 @@ export default function Footer() {
                             </Link>
                         </li>
                         <li>
-                            <Link href={'/'} className='text-[16px] text-[#5a5a5a] hover:text-[#C09578] duration-200'>
+                            <Link href={'/products'} className='text-[16px] text-[#5a5a5a] hover:text-[#C09578] duration-200'>
                                 Online Store
                             </Link>
                         </li>
                         <li>
-                            <Link href={'/'} className='text-[16px] text-[#5a5a5a] hover:text-[#C09578] duration-200'>
+                            <Link href={'/privacy-policy'} className='text-[16px] text-[#5a5a5a] hover:text-[#C09578] duration-200'>
                                 Privacy Policy
                             </Link>
                         </li>
                         <li>
-                            <Link href={'/'} className='text-[16px] text-[#5a5a5a] hover:text-[#C09578] duration-200'>
+                            <Link href={'/terms-of-use'} className='text-[16px] text-[#5a5a5a] hover:text-[#C09578] duration-200'>
                                 Terms Of Use
                             </Link>
                         </li>

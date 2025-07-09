@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useContext } from 'react'
 import { IoSearchOutline } from "react-icons/io5";
 import { FaHeart } from "react-icons/fa";
 import { IoMdCart } from "react-icons/io";
@@ -9,6 +9,10 @@ import { FaBars } from "react-icons/fa";
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
+import { LoginContext } from '@/app/MainLayout';
+import { IoIosLogOut } from "react-icons/io";
+import { useRouter } from 'next/navigation';
+
 
 
 
@@ -16,7 +20,7 @@ import { ToastContainer } from 'react-toastify';
 
 export default function Header() {
 
-
+    const router = useRouter();
 
     const monstaCart = useSelector((store) => {
         // console.log(store);
@@ -36,6 +40,18 @@ export default function Header() {
         return store.monstaWishlistReducer.monstaWishlist;
     });
 
+    let { UserID, setUserID, UserToken, setUserToken } = useContext(LoginContext);
+
+    let handleLogout = () => {
+        localStorage.removeItem('montaUser');
+        localStorage.removeItem('montaToken');
+
+        setUserID([]);
+        setUserToken('');
+
+        router.push('/login-register');
+    };
+
 
 
 
@@ -52,9 +68,29 @@ export default function Header() {
                         </span>
                     </div>
                     <div>
-                        <button className='cursor-pointer hover:text-[#C09578] duration-200'>
-                            Login / Register
-                        </button>
+                        {
+                            UserID && UserID.uid
+                                ? (
+                                    <div className='flex justify-center items-center gap-5'>
+                                        <Link href={'/dashboard'} className='cursor-pointer hover:text-[#C09578] duration-200'>
+                                            Dashboard
+                                        </Link>
+                                        <span
+                                            className='cursor-pointer hover:text-[#C09578] duration-200 flex justify-center items-center gap-1'
+                                            onClick={handleLogout}
+                                        >
+                                            <IoIosLogOut />
+                                            Logout
+                                        </span>
+                                    </div>
+                                )
+                                : (
+                                    <Link href={'/login-register'} className='cursor-pointer hover:text-[#C09578] duration-200'>
+                                        Login / Register
+                                    </Link>
+                                )
+                        }
+
                     </div>
                 </div>
             </div>
@@ -66,7 +102,9 @@ export default function Header() {
 
                     <div className='flex justify-between items-center'>
                         <div>
-                            <img src="/imgs/logo/site-logo.png" alt="" className='lg:w-[170px] w-[100px]' />
+                            <Link href={'/'}>
+                                <img src="/imgs/logo/site-logo.png" alt="" className='lg:w-[170px] w-[100px]' />
+                            </Link>
                         </div>
 
 
@@ -76,7 +114,7 @@ export default function Header() {
                             <div className='flex justify-between items-center gap-[50px]'>
                                 <div className='flex justify-center items-center gap-[20px]'>
                                     <div className='border border-[#ccc] p-2 hover:text-[#C09578] hover:border-[#C09578] duration-200 cursor-pointer relative'>
-                                        <Link href={'/'} className=''>
+                                        <Link href={'/wishlist'} className=''>
                                             <FaHeart className='text-[14px]' />
                                         </Link>
 
@@ -86,7 +124,7 @@ export default function Header() {
                                         </div>
                                     </div>
                                     <div className='border border-[#ccc] p-2 hover:text-[#C09578] hover:border-[#C09578] duration-200 cursor-pointer relative'>
-                                        <Link href={'/'} className=''>
+                                        <Link href={'/cart'} className=''>
                                             <IoMdCart className='text-[14px]' />
                                         </Link>
 
@@ -120,7 +158,7 @@ export default function Header() {
                             </div>
                         </div>
                         <div className='border border-[#ccc] p-2 hover:text-[#C09578] hover:border-[#C09578] duration-200 cursor-pointer relative'>
-                            <Link href={'/'} className=''>
+                            <Link href={'/wishlist'} className=''>
                                 <FaHeart className='text-2xl' />
                             </Link>
 
@@ -206,22 +244,22 @@ export default function Header() {
                             >
                                 <ul className="font-light text-[12px] text-[#949494] flex flex-col gap-[10px] normal-case">
                                     <li>
-                                        <Link href="/" className="hover:text-[#C09578] duration-200">
+                                        <Link href="/about-us" className="hover:text-[#C09578] duration-200">
                                             About Us
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/" className="hover:text-[#C09578] duration-200">
+                                        <Link href="/cart" className="hover:text-[#C09578] duration-200">
                                             Cart
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/" className="hover:text-[#C09578] duration-200">
+                                        <Link href="/checkout" className="hover:text-[#C09578] duration-200">
                                             Checkout
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/" className="whitespace-nowrap hover:text-[#C09578] duration-200">
+                                        <Link href="/frequently-questions" className="whitespace-nowrap hover:text-[#C09578] duration-200">
                                             Frequently Questions
                                         </Link>
                                     </li>
@@ -231,7 +269,7 @@ export default function Header() {
 
 
                         <li className='py-5'>
-                            <Link href={'/'} className='hover:text-[#C09578] duration-200'>
+                            <Link href={'/contact-us'} className='hover:text-[#C09578] duration-200'>
                                 Contact US
                             </Link>
                         </li>

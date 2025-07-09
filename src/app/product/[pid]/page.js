@@ -60,7 +60,7 @@ export default function SingleProductDetails() {
     const dis = productDetails.discountPercentage;
     const original_price = (price / (1 - dis / 100)).toFixed(2);
 
-    console.log(productDetails);
+    // console.log(productDetails);
 
     let testi_dta = productDetails.reviews.map((item) => {
         const date = new Date(item.date);
